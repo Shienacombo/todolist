@@ -1,0 +1,105 @@
+/* Set the body background and general font settings */
+body {
+    font-family: 'Arial', sans-serif;
+    color: #4e3629; /* Matching earthy brown tone */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    padding-top: 100px; /* Extra padding to ensure content doesn't overlap with the image */
+    background-color: #f9f5f1; /* Set a simple background color for the body */
+}
+
+/* Container styling for the clipboard */
+.container {
+    background: rgba(255, 255, 255, 0.8);
+    background-image: url('todolist.png'); /* Add the image inside the container */
+    background-size: 80px; /* Adjust the size of the image */
+    background-repeat: no-repeat;
+    background-position: top right; /* Position the image at the top-right corner */
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+    width: 350px;
+    text-align: center;
+    position: relative; /* Fixes the container in place */
+    height: auto; /* Allows the container to adjust its height */
+    max-height: 550px; /* Ensures container doesn't grow too tall */
+    overflow: hidden; /* Ensures content remains inside the container */
+    
+}
+
+/* Title Styling */
+h1 {
+    color: #593d29;
+    font-weight: bold;
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+/* Input fields styling */
+input[type="text"], input[type="date"] {
+    width: 90%;
+    padding: 10px;
+    margin: 10px 0;
+    border-radius: 8px;
+    border: 2px solid #d3c5b8;
+    background: #f9f5f1;
+}
+
+/* Button Styling */
+button {
+    padding: 10px 20px;
+    background-color: #d3a78a;
+    border: none;
+    color: white;
+    font-weight: bold;
+    border-radius: 8px;
+    cursor: pointer;
+    margin: 5px 0;
+}
+
+button:hover {
+    background-color: #b6886b;
+}
+
+/* Task List Styling */
+ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    height: 250px; /* Fixed height for the task list */
+    overflow-y: auto; /* Enables scrolling when tasks exceed the height */
+    border-top: 2px solid #d3c5b8;
+    border-bottom: 2px solid #d3c5b8;
+}
+
+li {
+    background-color: #f9f5f1;
+    padding: 10px;
+    border: 1px solid #d3c5b8;
+    border-radius: 8px;
+    margin: 10px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* Task action buttons (Edit/Delete) */
+button.edit, button.delete {
+    background-color: transparent;
+    border: none;
+    color: #593d29;
+    cursor: pointer;
+}
+
+button.edit:hover, button.delete:hover {
+    color: #b6886b;
+}
+
+/* Retrieve Button Styling */
+#retrieveBtn {
+    display: block; /* Ensure the retrieve button is shown */
+    margin-top: 10px;
+}

@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>To-Do List</title>
+</head>
+<body>
+    <div class="container">
+        <h1>My To-Do List</h1>
+        <input type="date" id="taskDate" required>
+        <input type="text" id="taskInput" placeholder="Add a new task..." required>
+        <button id="addTaskBtn">Add Task</button>
+        <ul id="taskList"></ul>
+
+        <!-- Retrieve Button -->
+        <button id="retrieveBtn" style="display: none;">Retrieve Task</button>
+    </div>
+    <script>
+        let tasks = [];
+let deletedTasks = []; // Array to store deleted tasks
+
+document.getElementById('addTaskBtn').addEventListener('click', addTask);
+document.getElementById('retrieveBtn').addEventListener('click', retrieveTask);
+
+function addTask() {
+    const taskInput = document.getElementById('taskInput');
+    const taskDate = document.getElementById('taskDate');
+
+    const taskValue = taskInput.value.trim();
+    const taskDateValue = taskDate.value;
+
+    if (taskValue && taskDateValue) {
+        const task = { id: Date.now(), date: taskDateValue, description: taskValue };
+        tasks.push(task);
+        taskInput.value = '';
+        taskDate.value = '';
+        renderTasks();
+    } else {
+        alert('Please enter a task and a date.');
+    }
+}
+
+function renderTasks() {
+    const taskList = document.getElementById('taskList');
+    taskList.innerHTML = '';
+
+    tasks.forEach(task => {
+        const li = document.createElement('li');
+        li.innerHTML = `<strong>Date: ${task.date}</strong><br>Task: ${task.description}`;
+
+        const editBtn = document.createElement('button');
+        editBtn.textContent = 'Edit';
+        editBtn.classList.add('edit');
+        editBtn.onclick = () => editTask(task.id);
+
+        const deleteBtn = document.createElement('button');
+        deleteBtn.textContent = 'Delete';
+        deleteBtn.classList.add('delete');
+        deleteBtn.onclick = () => deleteTask(task.id);
+
+        li.appendChild(editBtn);
+        li.appendChild(deleteBtn);
+        taskList.appendChild(li);
+    });
+
+    // Show or hide the Retrieve button based on deleted tasks
+    const retrieveBtn = document.getElementById('retrieveBtn');
+    retrieveBtn.style.display = deletedTasks.length > 0 ? 'block' : 'none'; 
+}
+
+function editTask(id) {
+    const task = tasks.find(task => task.id === id);
+    const newDescription = prompt('Edit task:', task.description);
+    const newDate = prompt('Edit date (YYYY-MM-DD):', task.date);
+
+    if (newDescription && newDate) {
+        task.description = newDescription;
+        task.date = newDate;
+        renderTasks();
+    }
+}
+
+function deleteTask(id) {
+    const taskIndex = tasks.findIndex(task => task.id === id);
+    if (taskIndex !== -1) {
+        deletedTasks.push(tasks[taskIndex]); // Store deleted task
+        tasks.splice(taskIndex, 1); // Remove task from main list
+    }
+    renderTasks();
+}
+
+function retrieveTask() {
+    if (deletedTasks.length > 0) {
+        const taskToRestore = deletedTasks.pop(); // Get the last deleted task
+        tasks.push(taskToRestore); // Restore it to the main list
+        renderTasks();
+    }
+}
+
+    </script>
+</body>
+</html>
